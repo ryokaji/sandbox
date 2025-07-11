@@ -7,4 +7,7 @@ export default defineConfig({
       entry: "src/index.ts",
     }),
   ],
+  test: {
+    globals: true,
+  },
 });

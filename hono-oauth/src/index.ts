@@ -1,6 +1,6 @@
-import { Hono } from "hono";
+import { createApp } from "./factory";
 
-const app = new Hono();
+const app = createApp();
 
 app.get("/", (c) => {
   return c.json({

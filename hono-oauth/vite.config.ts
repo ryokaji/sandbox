@@ -1,13 +1,23 @@
 import devServer from "@hono/vite-dev-server";
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 
-export default defineConfig({
-  plugins: [
-    devServer({
-      entry: "src/index.ts",
-    }),
-  ],
-  test: {
-    globals: true,
-  },
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), "");
+  return {
+    plugins: [
+      devServer({
+        entry: "src/index.ts",
+        // The env vars are available via `c.env` in the development mode
+        // and provided as specified type we defined.
+        env: {
+          MODE: mode,
+          VAR: "var",
+        },
+      }),
+    ],
+    test: {
+      globals: true,
+      env: env,
+    },
+  };
 });

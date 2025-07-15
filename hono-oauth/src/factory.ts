@@ -1,17 +1,21 @@
 import { Hono } from "hono";
+// import { env } from "hono/adapter";
 
 type Env = {
   Variables: {
-    NAME: string;
+    var: string;
   };
   Bindings: {
-    NAME: string;
+    VAR: string;
   };
 };
 
 export const createApp = () => {
   const app = new Hono<Env>();
   app.use("*", async (c, next) => {
+    // const { VAR } = env(c);
+    // c.set("var", VAR);
+
     await next();
   });
   return app;

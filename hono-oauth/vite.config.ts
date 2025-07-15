@@ -4,6 +4,14 @@ import { defineConfig, loadEnv } from "vite";
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
   return {
+    // Configuration for a server-side app.
+    build: {
+      ssr: true,
+      target: "node22",
+      rollupOptions: {
+        input: "src/index.ts",
+      },
+    },
     plugins: [
       devServer({
         entry: "src/index.ts",
